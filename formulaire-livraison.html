@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Commander une livraison – FABARA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="services.css">
+  <link rel="stylesheet" href="formulaire-livraison.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="container header-content">
+    <div class="logo">FABARA</div>
+    <nav class="nav">
+      <a href="index.html">Accueil</a>
+      <a href="livraison.html">Livraison</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="service-hero">
+  <div class="container">
+    <h1>Commander une livraison</h1>
+    <p>Renseignez les informations pour une livraison rapide et sécurisée.</p>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-section">
+  <div class="container">
+
+    <form class="delivery-form" onsubmit="submitDelivery(event)">
+
+      <h2>Informations du client</h2>
+
+      <div class="form-group">
+        <label>Nom complet *</label>
+        <input type="text" required placeholder="Ex : Mamady Diallo">
+      </div>
+
+      <div class="form-group">
+        <label>Téléphone *</label>
+        <input type="tel" id="phone" required placeholder="Ex : 622123456">
+        <small id="phone-error">Numéro guinéen invalide.</small>
+      </div>
+
+      <h2>Détails de la livraison</h2>
+
+      <div class="form-group">
+        <label>Type de livraison *</label>
+        <select required>
+          <option value="">-- Sélectionner --</option>
+          <option>Colis</option>
+          <option>Courses</option>
+          <option>Repas</option>
+          <option>Express</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Description *</label>
+        <textarea required placeholder="Ex : Livraison d’un colis fragile"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Adresse de départ *</label>
+        <input type="text" required placeholder="Ex : Madina marché">
+      </div>
+
+      <div class="form-group">
+        <label>Adresse de destination *</label>
+        <input type="text" required placeholder="Ex : Ratoma, Kaporo">
+      </div>
+
+      <div class="form-group">
+        <label>Urgence *</label>
+        <select required>
+          <option value="">-- Sélectionner --</option>
+          <option>Standard</option>
+          <option>Urgente</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-primary btn-full">
+        Envoyer la demande de livraison
+      </button>
+
+    </form>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-bottom">
+    © 2025 FABARA – Tous droits réservés.
+  </div>
+</footer>
+
+<script>
+function isValidGuineaPhone(phone) {
+  const regex = /^(?:\+224)?62[2-6|8][0-9]{6}$/;
+  return regex.test(phone.replace(/\s+/g, ''));
+}
+
+function submitDelivery(e) {
+  e.preventDefault();
+
+  const phone = document.getElementById("phone");
+  const error = document.getElementById("phone-error");
+
+  if (!isValidGuineaPhone(phone.value)) {
+    error.style.display = "block";
+    phone.style.borderColor = "red";
+    return;
+  }
+
+  error.style.display = "none";
+  phone.style.borderColor = "#e5e7eb";
+
+  alert("✅ Demande envoyée. Un livreur FABARA vous contactera sous peu.");
+}
+</script>
+
+</body>
+</html>

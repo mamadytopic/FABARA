@@ -1,0 +1,43 @@
+/* DELIVERY GRID */
+.delivery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.delivery-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.delivery-card:hover {
+  transform: translateY(-5px);
+}
+
+.delivery-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.delivery-card h3 {
+  margin: 15px 0 5px;
+  font-size: 18px;
+}
+
+.delivery-card p {
+  font-size: 14px;
+  color: #64748b;
+  padding: 0 10px 15px;
+}
+
+/* CTA BUTTON */
+.btn-large {
+  padding: 14px 32px;
+  font-size: 16px;
+  border-radius: 30px;
+}
