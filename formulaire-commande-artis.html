@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Passer une commande – FABARA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="forlulaire-commande-artis.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- INFOS ARTISAN -->
+  <div class="artisan-card">
+    <img src="artisan.jpg" alt="Artisan">
+    <div>
+      <h2>Diallo Création</h2>
+      <p>Textile & broderie – Conakry</p>
+    </div>
+  </div>
+
+  <!-- FORMULAIRE -->
+  <form class="order-form" onsubmit="event.preventDefault(); alert('Commande envoyée avec succès');">
+
+    <h3>Passer une commande</h3>
+
+    <!-- Infos client -->
+    <div class="field">
+      <label>Nom complet *</label>
+      <input type="text" required placeholder="Votre nom">
+    </div>
+
+    <div class="field">
+      <label>Téléphone *</label>
+      <input type="tel" required placeholder="Ex: 622 00 00 00">
+    </div>
+
+    <div class="field">
+      <label>Localisation *</label>
+      <input type="text" required placeholder="Quartier / Ville">
+    </div>
+
+    <!-- Commande -->
+    <div class="field">
+      <label>Produit / Service demandé *</label>
+      <input type="text" required placeholder="Ex: Broderie tenue">
+    </div>
+
+    <div class="field">
+      <label>Description</label>
+      <textarea placeholder="Détails, couleurs, modèle souhaité..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>Quantité *</label>
+      <input type="number" required placeholder="Ex: 10">
+    </div>
+
+    <div class="field">
+      <label>Délai souhaité</label>
+      <input type="text" placeholder="Ex: 7 jours">
+    </div>
+
+    <button type="submit" class="btn">
+      Envoyer la commande
+    </button>
+
+  </form>
+
+</div>
+
+</body>
+</html>

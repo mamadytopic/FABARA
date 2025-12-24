@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>FABARA – Artisanat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS commun -->
+   <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="artisanat.css">
+  <link rel="stylesheet" href="services.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="container header-content">
+    <div class="logo">FABARA</div>
+    <nav class="nav">
+      <a href="index.html">Accueil</a>
+      <a href="artisanat.html" class="active">Artisanat</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="service-hero">
+  <div class="container">
+    <h1>Artisanat local</h1>
+    <p>Découvrez le savoir-faire guinéen ou devenez artisan partenaire.</p>
+  </div>
+</section>
+
+<!-- TABS -->
+<section class="artisan-tabs">
+  <div class="container tab-card">
+
+    <div class="tab-buttons">
+      <button class="tab-btn active" onclick="switchTab('order')">Commander un produit</button>
+      <button class="tab-btn" onclick="switchTab('join')">Devenir artisan partenaire</button>
+    </div>
+
+    <!-- TAB 1 : COMMANDER -->
+    <div id="tab-order" class="tab-content active">
+      <div class="artisan-grid">
+
+        <a href="profil-artisan-diallo.html" class="artisan-card">
+          <img src="diallo.jpg" alt="">
+          <h3>Diallo Création</h3>
+          <p>Textile & Broderie</p>
+        </a>
+
+
+        <a href="profil-artisan-camara.html" class="artisan-card">
+         <img src="camara.jpg" alt="">
+         <h3>Camara Wood Art</h3>
+         <p>Sculpture & Bois</p>
+        </a>
+
+
+      </div>
+
+      <div class="tab-action">
+        <a href="boutiques.html" class="btn-primary">Voir tous les produits</a>
+      </div>
+    </div>
+
+    <!-- TAB 2 : INSCRIPTION -->
+    <div id="tab-join" class="tab-content">
+
+      <form class="artisan-form" onsubmit="submitArtisan(event)">
+
+  <div class="form-group">
+    <label>Nom complet </label>
+    <input type="text" required placeholder="Ex : Mamady Diallo">
+  </div>
+
+  <div class="form-group">
+    <label>Nom de l’atelier / marque</label>
+    <input type="text" placeholder="Ex : Diallo Création">
+  </div>
+
+  <div class="form-group">
+    <label>Téléphone </label>
+    <input type="tel" id="phone" required placeholder="Ex : 622123456">
+    <small id="phone-error">Numéro guinéen invalide.</small>
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input type="email" placeholder="exemple@email.com">
+  </div>
+
+  <div class="form-group">
+    <label>Type d’artisanat </label>
+    <select required>
+      <option value="">-- Sélectionner --</option>
+      <option>Textile / Couture</option>
+      <option>Sculpture / Bois</option>
+      <option>Bijouterie</option>
+      <option>Peinture / Art visuel</option>
+      <option>Cuir / Maroquinerie</option>
+      <option>Autre</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Description de l’activité </label>
+    <textarea required placeholder="Décrivez brièvement votre activité"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Ville / Commune </label>
+    <input type="text" required placeholder="Ex : Conakry, Ratoma">
+  </div>
+
+  <div class="form-group">
+    <label>Quartier </label>
+    <input type="text" required placeholder="Ex : Hamdallaye">
+  </div>
+
+  <div class="form-group">
+    <label>Travail sur commande ? </label>
+    <select required>
+      <option value="">-- Sélectionner --</option>
+      <option>Oui</option>
+      <option>Non</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Délai moyen de production </label>
+    <input type="text" required placeholder="Ex : 3 à 5 jours">
+  </div>
+
+  <button type="submit" class="btn-primary btn-full">
+    Envoyer la demande d’inscription
+  </button>
+
+</form>
+
+
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div>
+      <h3>FABARA</h3>
+      <p>Connecter les talents locaux aux besoins modernes.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 FABARA – Tous droits réservés.
+  </div>
+</footer>
+
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function isValidGuineaPhone(phone) {
+  const regex = /^(?:\+224)?62[2-6|8][0-9]{6}$/;
+  return regex.test(phone.replace(/\s+/g, ''));
+}
+
+function submitArtisan(e) {
+  e.preventDefault();
+  const phone = document.getElementById('phone');
+  const error = document.getElementById('phone-error');
+
+  if (!isValidGuineaPhone(phone.value)) {
+    error.style.display = "block";
+    phone.style.borderColor = "red";
+    return;
+  }
+
+  error.style.display = "none";
+  phone.style.borderColor = "#e5e7eb";
+
+  alert("Inscription envoyée. L’équipe FABARA vous contactera sous 24h.");
+}
+</script>
+
+</body>
+</html>
