@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Commandes – Admin FABARA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="commandes.css">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2 class="sidebar-logo">FABARA</h2>
+
+    <nav class="sidebar-nav">
+      <a href="index.html">📊 Dashboard</a>
+      <a href="commandes.html" class="active">📦 Commandes</a>
+      <a href="artisans.html">🧵 Artisans</a>
+      <a href="livreurs.html">🛵 Livreurs</a>
+      <a href="../index.html">🌐 Site public</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+
+    <header class="admin-header">
+      <h1>Commandes</h1>
+      <span>Gestion des demandes clients</span>
+    </header>
+
+    <!-- TABLE -->
+    <section class="table-card">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Service</th>
+            <th>Produits / Détails</th>
+            <th>Localisation</th>
+            <th>Statut</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="commandesTable">
+            
+        <!-- Rempli dynamiquement par commandes.js -->
+
+        </tbody>
+
+      </table>
+
+    </section>
+
+  </main>
+
+</div>
+
+<script src="commandes.js"></script>
+
+</body>
+</html>

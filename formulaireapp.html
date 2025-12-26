@@ -1,28 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Commande Approvisionnement – FABARA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="formulaireapp.css">
+</head>
+
+<body>
+
 <!-- HEADER -->
 <header class="header">
-    <div class="container header-content">
-      <div class="logo">FABARA</div>
-      <nav class="nav">
-        <a href="index.html">Accueil</a>
-        <a href="#services">Services</a>
-        <a href="#">À propos</a>
-        <button class="btn-primary">Connexion</button>
-      </nav>
-    </div>
-  </header>
+  <div class="container header-content">
+    <div class="logo">FABARA</div>
+    <nav class="nav">
+      <a href="index.html">Accueil</a>
+      <a href="approvisionnement.html">Approvisionnement</a>
+      <button class="btn-primary">Connexion</button>
+    </nav>
+  </div>
+</header>
 
 <!-- CTA -->
 <section class="service-cta">
   <h2>Besoin d’un approvisionnement fiable ?</h2>
-  <h3>Remplisez le formulaire</h3>
+  <h3>Remplissez le formulaire</h3>
 </section>
 
-<!-- liens -->
- <link rel="stylesheet" href="index.css">
- <link rel="stylesheet" href="formulaireapp.css">
-
-<!-- FORMULAIRE COMMANDE -->
-<section class="order-section" id="order-form">
+<!-- FORMULAIRE -->
+<section class="order-section">
   <div class="container">
     <div class="order-card">
 
@@ -31,23 +43,29 @@
         Remplissez ce formulaire et notre équipe vous contactera sous 24h.
       </p>
 
-      <form>
+      <form id="orderForm">
 
         <div class="form-grid">
           <div class="form-group">
-            <label>Nom / Entreprise</label>
-            <input type="text" placeholder="Ex : Restaurant Diallo">
+            <label for="nom">Nom / Entreprise *</label>
+            <input type="text" id="nom" name="nom" required placeholder="Ex : Restaurant Diallo">
           </div>
 
           <div class="form-group">
-            <label>Numéro de téléphone *</label>
-            <input type="tel" required placeholder="Ex : 622 00 00 00">
+            <label for="telephone">Numéro de téléphone *</label>
+            <input
+              type="tel"
+              id="telephone"
+              name="telephone"
+              required
+              pattern="[0-9]{8,}"
+              placeholder="Ex : 622000000">
           </div>
         </div>
 
         <div class="form-group">
-          <label>Type de client</label>
-          <select required>
+          <label for="typeClient">Type de client *</label>
+          <select id="typeClient" name="typeClient" required>
             <option value="">Sélectionner...</option>
             <option>Hôtel</option>
             <option>Restaurant</option>
@@ -57,18 +75,33 @@
         </div>
 
         <div class="form-group">
-          <label>Produits demandés</label>
-          <textarea placeholder="Ex : 50kg riz, 20kg tomate, 10kg oignon"></textarea>
+          <label for="produits">Produits demandés *</label>
+          <textarea
+            id="produits"
+            name="produits"
+            required
+            placeholder="Ex : 50kg riz, 20kg tomate"></textarea>
         </div>
 
         <div class="form-group">
-          <label>Quantité estimée</label>
-          <input type="text" placeholder="Ex : 100 kg">
+          <label for="quantite">Quantité estimée (kg) *</label>
+          <input
+            type="number"
+            id="quantite"
+            name="quantite"
+            min="1"
+            required
+            placeholder="Ex : 100">
         </div>
 
         <div class="form-group">
-          <label>Localisation</label>
-          <input type="text" placeholder="Quartier, point de repère">
+          <label for="localisation">Localisation *</label>
+          <input
+            type="text"
+            id="localisation"
+            name="localisation"
+            required
+            placeholder="Quartier, point de repère">
         </div>
 
         <button type="submit" class="btn-primary btn-full">
@@ -78,7 +111,7 @@
       </form>
 
       <div class="order-info">
-        Votre demande sera analysée par notre équipe avant confirmation dans 24H .
+        Votre demande sera analysée par notre équipe avant confirmation.
       </div>
 
     </div>
@@ -86,7 +119,7 @@
 </section>
 
 <!-- FOOTER -->
-  <footer class="footer">
+<footer class="footer">
   <div class="footer-container">
 
     <div class="footer-brand">
@@ -119,3 +152,70 @@
     © 2025 FABARA – Tous droits réservés.
   </div>
 </footer>
+
+<!-- SCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("orderForm");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const data = {
+      id: Date.now(),
+      nom: form.nom.value.trim(),
+      telephone: form.telephone.value.trim(),
+      typeClient: form.typeClient.value,
+      produits: form.produits.value.trim(),
+      quantite: form.quantite.value,
+      localisation: form.localisation.value.trim(),
+      service: "Approvisionnement",
+      statut: "En attente"
+    };
+
+    // Vérification finale
+    if (
+      !data.nom ||
+      !data.telephone ||
+      !data.typeClient ||
+      !data.produits ||
+      !data.quantite ||
+      !data.localisation
+    ) {
+      alert("❌ Veuillez remplir tous les champs");
+      return;
+    }
+
+    // Stockage local
+    const commandes = JSON.parse(localStorage.getItem("commandes")) || [];
+    commandes.push(data);
+    localStorage.setItem("commandes", JSON.stringify(commandes));
+
+    // Notification client
+    alert("✅ Demande envoyée avec succès !");
+
+    // WhatsApp équipe FABARA
+    const message = `
+Nouvelle commande FABARA 📦
+Client : ${data.nom}
+Service : ${data.service}
+Produits : ${data.produits}
+Quantité : ${data.quantite}
+Localisation : ${data.localisation}
+Téléphone : ${data.telephone}
+    `;
+
+    const whatsappURL =
+      "https://wa.me/224669421161?text=" +
+      encodeURIComponent(message);
+
+    window.open(whatsappURL, "_blank");
+
+    form.reset();
+  });
+});
+
+</script>
+
+</body>
+</html>
